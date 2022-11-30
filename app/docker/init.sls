@@ -1,9 +1,12 @@
+{% from "app/docker/map.jinja" import docker with context %}
 {% set user = salt['pillar.get']('users:primary-user') %}
 {% from tpldir ~ "/map.jinja" import config with context %}
 
 {{ config.installer | yaml(False) }}
 
-{% if grains.os_family in ('Linux','Arch','Debian') %}
+# Don't need docker-machine etc on linux
+{% if grains.kernel in ('Linux',) %}
+
 # This is configuration for Linux docker-native platforms
 
 {% if user != None %}

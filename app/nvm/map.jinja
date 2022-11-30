@@ -10,11 +10,8 @@
   'MacOS': {
     'package': 'nvm',
     'installer': 'pkg.installed',
-    'startup': '|
-      # NVM
-      export NVM_DIR=~/.nvm
-      source $(brew --prefix nvm)/nvm.sh
-      '
+    'startup': 'export NVM_DIR=~/.nvm && source $(brew --prefix nvm)/nvm.sh # NVM',
+    'user': user
   },
   'Arch': {
     'package': 'nvm',
