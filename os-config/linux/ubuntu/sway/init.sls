@@ -5,7 +5,6 @@ Install sway and related tools:
       - gnome-keyring
       - grim
       - i3status
-      - libsecret
       - mako-notifier
       - pavucontrol
       - pipewire # newer audio/video sharing subsystem
@@ -15,10 +14,18 @@ Install sway and related tools:
       - slurp
       - swayidle
       - swaylock
-      #- alacritty # argh, not available on ubuntu
       - thunar
       - thunar-volman
       - tmux
       - waybar
       - xdg-user-dirs
       - xwayland # sadly
+
+Install Alacritty PPA:
+  pkgrepo.managed:
+    - ppa: aslatter/ppa
+
+Install Alacritty:
+  pkg.latest:
+    - name: alacritty
+    - refresh: True
