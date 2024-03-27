@@ -25,4 +25,16 @@
     'binary': '/usr/bin/eclipse',
     'packageLocation': userInfo.home + '/.eclipse/'
   },
-}, merge=salt['pillar.get']('eclipse:lookup')) %}
+}, grain='os_family', merge=salt['grains.filter_by']({
+  'Ubuntu': {
+    'package': 'eclipse',
+    'installer': {
+      'cmd.run': [
+        {'unless': 'which eclipse'},
+        {'name': 'snap install eclipse --classic'}
+      ]
+    },
+    'binary': '/snap/bin/eclipse',
+    'packageLocation': userInfo.home + '/snap/eclipse/current/'
+  },
+}, grain='os', merge=salt['pillar.get']('eclipse:lookup'))) %}

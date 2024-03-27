@@ -1,0 +1,51 @@
+{% set pipewire = salt['grains.filter_by']({
+  'default': {
+    'main': {
+      'installer': 'test.nop'
+    },
+    'wireplumber': {
+      'installer': 'test.nop'
+    },
+  },
+
+  'Debian': {
+    'main': {
+      'installer': {
+        'pkgrepo.managed': [{
+          'ppa': 'pipewire-debian/pipewire-upstream',
+        }],
+        'pkg.installed': [
+          {
+            'pkgs': [
+              'pipewire',
+              'pipewire-bin',
+              'pipewire-pulse',
+              'pipewire-v4l2',
+              'pipewire-libcamera',
+              'pipewire-audio-client-libraries',
+              'pipewire-doc',
+              'gstreamer1.0-pipewire',
+              'libspa-0.2-bluetooth',
+            ]
+          },
+        ],
+      },
+    },
+    'wireplumber': {
+      'installer': {
+        'pkgrepo.managed': [{
+          'ppa': 'pipewire-debian/wireplumber-upstream',
+        }],
+        'pkg.installed': [
+          {
+            'pkgs': [
+              'wireplumber',
+              'wireplumber-doc',
+              'gir1.2-wp-0.4',
+            ]
+          },
+        ],
+      },
+    },
+  },
+}, merge=salt['pillar.get']('pipewire:lookup'), default='default') %}

@@ -21,4 +21,10 @@ Ensure docker service is enabled:
   service.enabled:
     - name: docker
 
+Ensure ip forwarding is on so containers can access network:
+  file.managed:
+    - name: /etc/sysctl.d/30-ipforward.conf
+    - contents: |
+        net.ipv4.ip_forward=1
+
 {% endif %}
