@@ -13,7 +13,13 @@
   },
   'Arch': {
     'package': 'salt',
-    'installer': 'pkg.installed',
+    'installer': {
+      'cmd.run': [
+        {'unless': 'pacman -Qi salt-onedir'},
+        {'runas': 'aur-builder'},
+        {'name': 'yay -S salt-onedir --noconfirm'}
+      ]
+    },
     'service': 'salt-minion'
   },
   'Debian': {
